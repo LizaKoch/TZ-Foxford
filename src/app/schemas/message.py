@@ -16,7 +16,7 @@ class MessageCreate(BaseModel):
     @model_validator(mode='before')
     @classmethod
     def check_telegram_id_or_ticket_id(cls, values: any):
-        if (values.get('telegram_id') is None) and (values.get("ticket_id") is None):
+        if (values.get('telegram_id') is None) and (values.get('ticket_id') is None):  # noqa: E501
             raise ValueError('either telegram_id or ticket_id is required')
         return values
 

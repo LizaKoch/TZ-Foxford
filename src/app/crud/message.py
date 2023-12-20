@@ -22,35 +22,16 @@ class MessageCRUD(CRUDBase[Message, MessageCreate, None]):
         )
         return message_db.scalars().all()
 
-    async def get_client_id_by_ticket_id(
-            self,
-            ticket_id: int,
-            session: AsyncSession,
-    ) -> Optional[int]:
-        client_id = await session.execute(
-            select(Ticket.client_id).where(Ticket.id == ticket_id),
-        )
-        return client_id.scalars().first()
-
     async def create(
-        self, obj_in, session: AsyncSession, user: Optional[User] = None,
+            self,
+            obj_in,
+            session: AsyncSession,
+            user: Optional[User] = None,
     ) -> ModelType:
         obj_in_data = obj_in
 
         if user is not None:
             obj_in_data['employee_id'] = user.id
-
-        # telegram_id = obj_in_data.get('telegram_id')
-        # if telegram_id:
-        #     client_id = await self.get_client_id_by_telegram_id(
-        #         telegram_id=obj_in_data.pop("telegram_id"),
-        #         session=session,
-        #     )
-        # else:
-        #     client_id = await self.get_client_id_by_ticket_id(
-        #         ticket_id=obj_in_data.get('ticket_id'),
-        #         session=session,
-        #     )
 
         db_object = self.model(**obj_in_data)
 

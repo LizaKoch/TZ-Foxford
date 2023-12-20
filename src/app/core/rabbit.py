@@ -1,7 +1,11 @@
 import aio_pika
 
+from src.app.core.config import settings
+
+
 class MessageBroker:
     def __init__(self, connection_url: str):
+        """Message broker class."""
         self.connection_url = connection_url
         self.connection = None
 
@@ -16,7 +20,7 @@ class MessageBroker:
 
 
 async def get_message_broker():
-    broker = MessageBroker(connection_url="amqp://developer:1q2w3e4r@127.0.0.1/")
+    broker = MessageBroker(connection_url=settings.con_rabbit)
     await broker.connect()
     try:
         yield broker

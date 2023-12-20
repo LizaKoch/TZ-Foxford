@@ -2,7 +2,7 @@ from datetime import date, datetime
 from typing import Optional
 
 from fastapi_filter.contrib.sqlalchemy import Filter
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel
 
 from src.app.models.ticket import Ticket, TicketStatus
 

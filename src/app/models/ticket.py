@@ -11,8 +11,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.app.core.db import Base
 from src.app.models.client import Client
-from src.app.models.user import User
 from src.app.models.message import Message
+from src.app.models.user import User
+
 
 class TicketStatus(PythonEnum):
     OPEN = 'Открыт'

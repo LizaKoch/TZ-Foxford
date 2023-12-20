@@ -10,7 +10,7 @@ from src.app.models.ticket import Ticket
 from src.app.models.user import User
 from src.app.schemas.ticket import TicketCreate, TicketFilter, TicketUpdate
 
-ModelType = TypeVar("ModelType", bound=Base)
+ModelType = TypeVar('ModelType', bound=Base)
 
 
 class TicketCRUD(CRUDBase[Ticket, TicketCreate, TicketUpdate]):
@@ -28,7 +28,7 @@ class TicketCRUD(CRUDBase[Ticket, TicketCreate, TicketUpdate]):
                 self.model.employee_id == filters.employee_id,
             )
         if filters.created_at:
-            filters.created_at = filters.created_at.strftime("%Y-%m-%d")
+            filters.created_at = filters.created_at.strftime('%Y-%m-%d')
             query = select(Ticket).where(
                 func.date(
                     self.model.created_at,
@@ -36,7 +36,7 @@ class TicketCRUD(CRUDBase[Ticket, TicketCreate, TicketUpdate]):
                 == func.date(filters.created_at),
             )
         if filters.updated_at:
-            filters.updated_at = filters.updated_at.strftime("%Y-%m-%d")
+            filters.updated_at = filters.updated_at.strftime('%Y-%m-%d')
             query = select(Ticket).where(
                 func.date(
                     self.model.updated_at,
@@ -60,7 +60,8 @@ class TicketCRUD(CRUDBase[Ticket, TicketCreate, TicketUpdate]):
         ticket_db = await session.execute(
             select(Ticket).where(
                 Ticket.client_id == client_id,
-                Ticket.status == "OPEN",
+                ((Ticket.status == 'OPEN') |
+                (Ticket.status == 'IN_PROGRESS')),
             ),
         )
         return ticket_db.scalars().first()
@@ -75,16 +76,6 @@ class TicketCRUD(CRUDBase[Ticket, TicketCreate, TicketUpdate]):
         )
         return client_id.scalars().first()
 
-    async def get_client_id_by_ticket_id(
-        self,
-        ticket_id: int,
-        session: AsyncSession,
-    ) -> Optional[int]:
-        client_id = await session.execute(
-            select(Ticket.client_id).where(Ticket.id == ticket_id),
-        )
-        return client_id.scalars().first()
-
     async def create(
         self,
         obj_in,
@@ -94,9 +85,9 @@ class TicketCRUD(CRUDBase[Ticket, TicketCreate, TicketUpdate]):
         obj_in_data = obj_in.dict()
 
         if user is not None:
-            obj_in_data["user_id"] = user.id
+            obj_in_data['user_id'] = user.id
         client_id = await self.get_client_id_by_telegram_id(
-            telegram_id=obj_in_data.pop("telegram_id"),
+            telegram_id=obj_in_data.pop('telegram_id'),
             session=session,
         )
         db_object = self.model(client_id=client_id)
