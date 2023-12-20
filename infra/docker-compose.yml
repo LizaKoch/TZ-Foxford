@@ -1,0 +1,63 @@
+version: "3.9"
+
+services:
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: postgres_tickets
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3.10.7-management
+    container_name: rabbitmq_tickets
+    environment:
+      - RABBITMQ_DEFAULT_USER=developer
+      - RABBITMQ_DEFAULT_PASS=1q2w3e4r
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  app:
+    build:
+      context: ../
+      dockerfile: src/app/Dockerfile
+    container_name: app_tickets
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres_db/postgres
+    env_file:
+      - ../.env
+    depends_on:
+      - postgres_db
+    #      - rabbitmq
+
+  bot:
+    build:
+      context: ../
+      dockerfile: src/bot/Dockerfile
+    container_name: bot_tickets
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - API_MESSAGE=http://app:8000/messages/
+      - API_CLIENT=http://app:8000/clients/
+    env_file:
+      - ../.env
+    depends_on:
+      - postgres_db
+#    networks:
+#      - services
+
+volumes:
+  postgres_data:
