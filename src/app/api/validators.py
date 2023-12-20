@@ -34,6 +34,7 @@ async def check_ticket_is_exist(
             detail='Тикет не найден!',
         )
 
+
 async def check_ticket_already_closed(
         ticket_id: int,
         session: AsyncSession,
@@ -48,6 +49,7 @@ async def check_ticket_already_closed(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail='Тикет уже закрыт!',
         )
+
 
 async def check_the_same_ticket_status(
         ticket_id: int,

@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter, Depends
 from fastapi_filter import FilterDepends
 from sqlalchemy.ext.asyncio import AsyncSession

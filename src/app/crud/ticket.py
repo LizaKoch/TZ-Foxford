@@ -12,7 +12,6 @@ from src.app.schemas.ticket import TicketCreate, TicketFilter, TicketUpdate
 
 ModelType = TypeVar('ModelType', bound=Base)
 
-
 class TicketCRUD(CRUDBase[Ticket, TicketCreate, TicketUpdate]):
     async def get_multi_with_filter(
         self,

@@ -24,6 +24,7 @@ async def connect_to_broker(
             routing_key=routing_key,
         )
 
+
 async def change_status(ticket, broker):
     channel = broker.get_channel()
     exchange_name = 'change_status'

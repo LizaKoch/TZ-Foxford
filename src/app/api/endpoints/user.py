@@ -21,7 +21,6 @@ router.include_router(
     tags=['users'],
 )
 
-
 @router.delete('/users/{id}', tags=['users'], deprecated=True)
 def delete_user(id: str):  # noqa
     """Delete user by id."""
