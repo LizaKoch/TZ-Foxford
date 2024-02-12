@@ -606,22 +606,22 @@ sqlalchemy = ["SQLAlchemy (>=1.4.36,<2.1.0)"]
 
 [[package]]
 name = "fastapi-users"
-version = "12.1.2"
+version = "12.1.3"
 description = "Ready-to-use and customizable users management for FastAPI"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fastapi_users-12.1.2-py3-none-any.whl", hash = "sha256:768e3b17b9b89b5f5d3c303afefd69874da0fc97ebac16a86167d4c8d414d479"},
-    {file = "fastapi_users-12.1.2.tar.gz", hash = "sha256:9a9b44e0917c483aaba2bf80ea488b4ba6475b0fb24e2abfaf21e0b5c5db59bf"},
+    {file = "fastapi_users-12.1.3-py3-none-any.whl", hash = "sha256:9faff9fc072df12a9e60595a620f44e0028cc7ecc7130d6048d448befec39a1e"},
+    {file = "fastapi_users-12.1.3.tar.gz", hash = "sha256:81236f802228e25d1fe4c3006bc5e9d1d651d83147747d6ab19edd81401d09d4"},
 ]
 
 [package.dependencies]
-email-validator = ">=1.1.0,<2.1"
+email-validator = ">=1.1.0,<2.2"
 fastapi = ">=0.65.2"
 makefun = ">=1.11.2,<2.0.0"
 passlib = {version = "1.7.4", extras = ["bcrypt"]}
 pyjwt = {version = "2.8.0", extras = ["crypto"]}
-python-multipart = "0.0.6"
+python-multipart = "0.0.7"
 
 [package.extras]
 beanie = ["fastapi-users-db-beanie (>=3.0.0)"]
@@ -1215,17 +1215,17 @@ cli = ["click (>=5.0)"]
 
 [[package]]
 name = "python-multipart"
-version = "0.0.6"
+version = "0.0.7"
 description = "A streaming multipart parser for Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "python_multipart-0.0.6-py3-none-any.whl", hash = "sha256:ee698bab5ef148b0a760751c261902cd096e57e10558e11aca17646b74ee1c18"},
-    {file = "python_multipart-0.0.6.tar.gz", hash = "sha256:e9925a80bb668529f1b67c7fdb0a5dacdd7cbfc6fb0bff3ea443fe22bdd62132"},
+    {file = "python_multipart-0.0.7-py3-none-any.whl", hash = "sha256:b1fef9a53b74c795e2347daac8c54b252d9e0df9c619712691c1cc8021bd3c49"},
+    {file = "python_multipart-0.0.7.tar.gz", hash = "sha256:288a6c39b06596c1b988bb6794c6fbc80e6c369e35e5062637df256bee0c9af9"},
 ]
 
 [package.extras]
-dev = ["atomicwrites (==1.2.1)", "attrs (==19.2.0)", "coverage (==6.5.0)", "hatch", "invoke (==1.7.3)", "more-itertools (==4.3.0)", "pbr (==4.3.0)", "pluggy (==1.0.0)", "py (==1.11.0)", "pytest (==7.2.0)", "pytest-cov (==4.0.0)", "pytest-timeout (==2.1.0)", "pyyaml (==5.1)"]
+dev = ["atomicwrites (==1.2.1)", "attrs (==19.2.0)", "coverage (==6.5.0)", "hatch", "invoke (==2.2.0)", "more-itertools (==4.3.0)", "pbr (==4.3.0)", "pluggy (==1.0.0)", "py (==1.11.0)", "pytest (==7.2.0)", "pytest-cov (==4.0.0)", "pytest-timeout (==2.1.0)", "pyyaml (==5.1)"]
 
 [[package]]
 name = "rabbitmq"
